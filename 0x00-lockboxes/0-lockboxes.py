@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+from arepl_dump import dump
 """
 
 """
@@ -11,12 +11,24 @@ def canUnlockAll():
 
     print(boxes)
     i = 1
-
+    counter = 0
+    isUnlocked = []
+    result = 0
+    
     for innerList in boxes:
-        boxLable = i
-        print(boxLable, sorted(innerList))
+        print(i, innerList)
         i += 1
-        
+        counter += 1
+        while innerList:
+            for j in innerList:    
+                if i == j:
+                    result = 1
+                else:
+                    result = -1
+            isUnlocked.append(result)
+        print(result)
+
+
 
 
 
