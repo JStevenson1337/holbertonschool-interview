@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
+"""
+Method that determines if all the boxes can be opened.
+"""
 
 def canUnlockAll(boxes):
-    '''
+    """
     Method that determines if all the boxes can be opened.
-    '''
+    """
     if (len(boxes) == 0):
         return False
     box = list(range(len(boxes)))
@@ -26,4 +28,4 @@ def canUnlockAll(boxes):
 
 
 if __name__ == "__main__":
-    canUnlockAll(boxes)
+    canUnlockAll()
