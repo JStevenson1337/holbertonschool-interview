@@ -1,77 +1,13 @@
 #include "sandpiles.h"
-
 /**
- * sandpiles_sum - computes the sum of two sandpiles
- * @grid1: 3x3 Grid
- * @grid2: 3x3 Grid
- * Return: None
- */
-
-void sandpiles_sum(int grid1[3][3], int grid2[3][3])
-{
-
-
-	sum_grids(grid1, grid2);
-
-	while (!check_grids(grid1))
-	{
-		print_grid(grid1);
-		change_grids(grid1);
-	}
-
-}
-
-
-/**
- * sum_grids - computes the sum of two sandpiles
- * @grid1: 3x3 Grid
- * @grid2: 3x3 Grid
- * Return: None
- */
-void sum_grids(int grid1[3][3], int grid2[3][3])
-{
-	int i;
-	int j;
-
-
-	for (i = 0; i < 3; i++)
-	{
-		for (j = 0; j < 3; j++)
-		{
-			grid1[i][j] = grid1[i][j] + grid2[i][j];
-		}
-	}
-}
-
-
-/**
- * check_grids - computes the sum of two sandpiles
- * @grid1: 3x3 Grid
- * Return: None
- */
-int  check_grids(int grid1[3][3])
-{
-
-	int i = 0;
-	int j = 0;
-
-	for (i = 0; i < 3; i++)
-		for (j = 0; j < 3; j++)
-			if (grid1[i][j] > 3)
-				return (0);
-	return (1);
-}
-
-/**
- * print_grid - computes the sum of two sandpiles
- * @grid: 3x3 Grid
- * Return: None
+ * print_grid - Print 3x3 grid
+ * @grid: a pair of 3x3 multidemential arrays
+ * Return: NONE
  */
 void print_grid(int grid[3][3])
 {
 	int i, j;
 
-	printf("=\n");
 	for (i = 0; i < 3; i++)
 	{
 		for (j = 0; j < 3; j++)
@@ -83,40 +19,66 @@ void print_grid(int grid[3][3])
 		printf("\n");
 	}
 }
-
 /**
- * change_grids - Redistribution
- * @grid1: 3x3 Grid
- * Return: None
+ * is_stable - Chect to see if at equilirium.
+ * @grid1: 3x3 multidemential array
+ * @grid2: 3x3 multidemential array
+ * Return: Status, 0 yes 1 no.
  */
-void change_grids(int grid1[3][3])
+int is_stable(int grid1[3][3], int grid2[3][3])
 {
-	int i;
-	int j;
-	int new_grid[3][3];
+	int i, j, status = 0;
 
-	for (i = 0; i < 3; i++)
-		for (j = 0; j < 3; j++)
-			new_grid[i][j] = 0;
-
-	for (i = 0; i < 3; i++)
+	for (i = 0; i <= 2; i++)
 	{
-		for (j = 0; j < 3; j++)
+		for (j = 0; j <= 2; j++)
 		{
-			if (grid1[i][j] > 3)
-			{
-				grid1[i][j] = grid1[i][j] - 4;
-				if ((i - 1 >= 0) && (i - 1 < 3))
-					new_grid[i - 1][j] += 1;
-				if ((j - 1 >= 0) && (j - 1 < 3))
-					new_grid[i][j - 1] += 1;
-				if ((i + 1 >= 0) && (i + 1 < 3))
-					new_grid[i + 1][j] += 1;
-				if ((j + 1 >= 0) && (j + 1 < 3))
-					new_grid[i][j + 1] += 1;
-			}
+			grid1[i][j] += grid2[i][j], grid2[i][j] = 0;
+			if (grid1[i][j] >= 4)
+				status = 1;
 		}
 	}
+	return (status);
+}
+/**
+ * redistrobution - Waits while indicies reach equalibruim
+ * @grid1: 3x3 multidemential array
+ * @grid2: 3x3 multidemential array
+ * Return: NONE
+ */
+void redistrobution(int grid1[3][3], int grid2[3][3])
+{
+	int i, j, status = 1;
 
-	sum_grids(grid1, new_grid);
+	while (status == 1)
+	{
+		printf("=\n");
+		print_grid(grid1);
+		for (i = 0; i < 3; i++)
+		{
+			for (j = 0; j < 3; j++)
+			{
+				if (grid1[i][j] >= 4)
+				{
+					grid1[i][j] -= 4;
+					i - 1 >= 0 ? grid2[i - 1][j] += 1 : 0;
+					i + 1 < 3 ? grid2[i + 1][j] += 1 : 0;
+					j - 1 >= 0 ? grid2[i][j - 1] += 1 : 0;
+					j + 1 < 3 ? grid2[i][j + 1] += 1 : 0;
+				}
+			}
+		}
+		status = is_stable(grid1, grid2);
+	}
+}
+/**
+ * sandpiles_sum - function that computes the sum of two sandpiles.
+ * @grid1: sandpile, a matrix, first grid.
+ * @grid2: sandpile, a matrix, second grid.
+ * Return: Nothing.
+ */
+void sandpiles_sum(int grid1[3][3], int grid2[3][3])
+{
+	if (is_stable(grid1, grid2))
+		redistrobution(grid1, grid2);
 }

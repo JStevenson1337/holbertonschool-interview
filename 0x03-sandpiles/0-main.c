@@ -15,8 +15,8 @@ static void print_grid_sum(int grid1[3][3], int grid2[3][3])
 
     for (i = 0; i < 3; i++)
     {
-        for (j = 0; j < 3;
-	  {
+        for (j = 0; j < 3; j++)
+        {
             if (j)
                 printf(" ");
             printf("%d", grid1[i][j]);
@@ -74,7 +74,8 @@ int main(void)
     };
 
     print_grid_sum(grid1, grid2);
-sandpiles_sum(grid1, grid2);
+
+    sandpiles_sum(grid1, grid2);
 
     printf("=\n");
     print_grid(grid1);
