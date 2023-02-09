@@ -5,7 +5,6 @@
      there is a single character H. Your text editor can execute only two operations in this file: Copy All and Paste. Given a number n, write a method that calculates the fewest number of operations needed to result in exactly n H characters in the file.
 
 """
-import sys
 def minOperations(n):
     count= ['H']
     current = ['H']
@@ -13,7 +12,7 @@ def minOperations(n):
 
     if n <= 1 or isinstance(n, int) is False:
         return 0
-    elif n > sys.maxsize:
+    elif n > 9223372036854775807:
         count = 1
         current = 1
         while count < n:
