@@ -42,3 +42,6 @@ def minOperations(n):
                 count.extend(current)
                 iteration += 1
     return iteration
+
+if '__name__'=='__main__':
+    minOperations()
