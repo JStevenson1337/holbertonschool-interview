@@ -6,6 +6,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-
+int is_palindrome(unsigned long n);
 
 #endif /* __PALINDROME_H__ */
