@@ -1,0 +1,21 @@
+#include "menger.h"
+/**
+ * menger - draws a 2D menger sponge
+ *
+ * @level: size of the surface
+ */
+void menger(int level)
+{
+        const char octothorp = '#';
+	
+	if (level < 0)
+	{
+	  printf("%c\n", octothorp);
+	}
+
+	while (level > 0)
+	{
+	  printf("%c", octothorp);
+	}
+
+}
