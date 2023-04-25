@@ -6,12 +6,14 @@
  */
 void menger(int level)
 {
-	int i, j;
+	int i, j, size;
 
     if (level < 0)
+	{
         return;
+	}
 
-    int size = (int)pow(3, level);
+	size = (int)pow(3, level);
 
     /* Draw the sponge */
     for (i = 0; i < size; i++)
