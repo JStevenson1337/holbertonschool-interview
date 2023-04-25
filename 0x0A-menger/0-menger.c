@@ -6,27 +6,21 @@
  */
 void menger(int level)
 {
-	int i, j, size;
+	int i, j, k, symbol, size = pow(3, level);
 
-    if (level < 0)
+	for (i = 0; i < size; i++)
 	{
-        return;
+		for (j = 0; j < size; j++)
+		{
+			symbol = '#';
+			for (k = 1; k < size; k *= 3)
+				if ((i / k) % 3 == 1 && (j / k) % 3 == 1)
+				{
+					symbol = ' ';
+					break;
+				}
+			putchar(symbol);
+		}
+		putchar('\n');
 	}
-
-	size = (int)pow(3, level);
-
-    /* Draw the sponge */
-    for (i = 0; i < size; i++)
-    {
-        for (j = 0; j < size; j++)
-        {
-            /* Check if cell (i,I j) is not an empty cell */
-            if (((i / (int)pow(3, level - 1)) % 3 == 1) &&
-                ((j / (int)pow(3, level - 1)) % 3 == 1))
-                printf(" ");
-            else
-                printf("#");
-        }
-        printf("\n");
-    }
 }
