@@ -6,15 +6,17 @@
  */
 void menger(int level)
 {
+	int i, j;
+
     if (level < 0)
         return;
 
     int size = (int)pow(3, level);
 
     /* Draw the sponge */
-    for (int i = 0; i < size; i++)
+    for (i = 0; i < size; i++)
     {
-        for (int j = 0; j < size; j++)
+        for (j = 0; j < size; j++)
         {
             /* Check if cell (i,I j) is not an empty cell */
             if (((i / (int)pow(3, level - 1)) % 3 == 1) &&
